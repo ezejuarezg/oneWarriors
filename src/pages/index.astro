@@ -1,8 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-
+import '../styles/global.css';
+import Hero from '../components/HeroContent.tsx';
 ---
 
-<Layout>
+<Layout pageTitle="One Warriors" description="Bienvenido a One Warriors">
+  <main>
+    <Hero client:load />
+    <!-- Próximas secciones -->
+  </main>
 </Layout>
+  

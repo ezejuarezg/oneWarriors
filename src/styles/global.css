@@ -1,7 +1,108 @@
 @import "tailwindcss";
+@import '@fontsource-variable/manrope';
 
 body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  margin: 0;
+  
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+@layer base {
+  html {
+    font-size: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    html {
+      font-size: 90%;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    html {
+      font-size: 90%;
+    }
+  }
+}
+
+@theme {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-bg: #0a0a0a;
+  --color-brand-surface: #141414;
+  --color-brand-lime: #9be31c;
+  --color-brand-text: #f5f5f5;
+  --color-brand-muted: #a3a3a3;
+}
+
+/* Lenis maneja el scroll, así que no usamos el smooth nativo */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  @apply bg-brand-bg text-brand-text font-sans antialiased;
+}
+
+/* ---------- Intro: solo se activa en la primera visita de la pestaña ---------- */
+
+@keyframes intro-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes intro-down {
+  from { opacity: 0; transform: translateY(-100%); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes intro-mask {
+  from { transform: translateY(110%); }
+  to   { transform: none; }
+}
+
+@keyframes intro-zoom {
+  from { transform: scale(1.08); }
+  to   { transform: none; }
+}
+
+.intro-pending .intro-up {
+  animation: intro-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both;
+}
+
+.intro-pending .intro-mask {
+  animation: intro-mask 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both;
+}
+
+.intro-pending .intro-down {
+  animation: intro-down 0.6s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both;
+}
+
+.intro-pending .intro-zoom {
+  animation: intro-zoom 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-pending * {
+    animation: none !important;
+  }
+}
+
+/* Sin transiciones durante la carga: evita el flash al refrescar */
+.preload *,
+.preload *::before,
+.preload *::after {
+  transition: none !important;
+}

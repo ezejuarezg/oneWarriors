@@ -1,14 +1,45 @@
+---
+import "../styles/global.css";
+import Navbar from '../components/Navbar.tsx';
+import SmoothScroll from '../components/SmoothScroll.tsx';
+
+interface Props {
+  pageTitle: string;  
+  description?: string;
+
+}
+
+const { pageTitle, description = 'Entrenamiento personalizado para alcanzar tus objetivos.' } = Astro.props;
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="es_AR">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+		<link rel="icon" href="./favicon/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title></title>
+    <link rel="icon" type="image/png" href="./favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="OneWarrios" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <!-- Se ejecuta antes de iniciar: decide si la intro se reproduce -->
+    <script is:inline>
+      try {
+        if (sessionStorage.getItem('ow-intro-played') !== '1') {
+          document.documentElement.classList.add('intro-pending');
+        }
+        sessionStorage.setItem('ow-intro-played', '1');
+      } catch (e) {}
+    </script>
+		<title> {pageTitle} </title>
 	</head>
 	<body>
+    <SmoothScroll client:load />
+    <Navbar client:load />
 		<slot />
 	</body>
 </html>
