@@ -3,6 +3,7 @@ import "../styles/global.css";
 import Navbar from "../components/Navbar";
 import SmoothScroll from "../components/SmoothScroll";
 import { site } from "../data/site";
+import SpeedInsights from "@vercel/speed-insights/astro";
 
 interface Props {
   pageTitle: string;
@@ -79,5 +80,6 @@ const imageUrl = new URL(image, site.url).href;
     <SmoothScroll client:load />
     <Navbar client:load homeBase={homeBase} />
     <slot />
+    <SpeedInsights />
   </body>
 </html>
