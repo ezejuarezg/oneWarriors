@@ -2,6 +2,7 @@
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
+import vercel from '@astrojs/vercel';
 
 import sitemap from '@astrojs/sitemap';
 
@@ -12,5 +13,8 @@ export default defineConfig({
   },
 
   integrations: [react(), sitemap()],
-  site: 'https://onewarriors.vercel.app/'
+  site: 'https://onewarriors.vercel.app/',
+  adapter: vercel({
+    webAnalytics: { enabled: true }
+  })
 });
