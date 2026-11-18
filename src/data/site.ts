@@ -1,5 +1,6 @@
 export const site = {
   name: "One Warrior",
+  url: "https://onewarriors.vercel.app/",
   location: {
     lat: -35.5735,
     lng: -58.0155,

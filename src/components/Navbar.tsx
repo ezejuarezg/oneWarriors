@@ -4,26 +4,32 @@ import MotionButton from "./MotionButton";
 import { scrollToId } from "./useScrollAction";
 
 const links = [
-  { label: "Entrenamiento", href: "#entrenamiento" },
-  { label: "Sobre Mí", href: "#sobre-mi" },
-  { label: "Preguntas Frecuentes", href: "#faq" },
+  { label: "Entrenamiento", id: "entrenamiento" },
+  { label: "Sobre Mí", id: "sobre-mi" },
+  { label: "Preguntas Frecuentes", id: "faq" },
 ];
-
-// Ids de las secciones que el navbar vigila para marcar la activa
-const sectionIds = links.map((l) => l.href.replace("#", ""));
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-export default function Navbar() {
+type NavbarProps = {
+  /** Vacío en la página principal. En otras páginas, "/" para volver al inicio */
+  homeBase?: string;
+};
+
+export default function Navbar({ homeBase = "" }: NavbarProps) {
+  const isHome = homeBase === "";
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!isHome) return;
+
+    const sectionIds = links.map((l) => l.id);
+
     const onScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      // La sección activa es la que cruza la franja del 35% superior de la pantalla
       const line = window.innerHeight * 0.35;
       let current: string | null = null;
 
@@ -48,19 +54,22 @@ export default function Navbar() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, []);
+  }, [isHome]);
 
-  // Scroll suave con Lenis, cierre del menú móvil y hash actualizado
-  const handleNav = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
+  // En la página principal: scroll suave con Lenis.
+  // En otras páginas: navegación normal hacia "/#seccion".
+  const handleNav = (e: MouseEvent<HTMLAnchorElement>, id: string) => {
     setOpen(false);
-    const id = href.replace("#", "");
+    if (!isHome) return;
+
+    e.preventDefault();
     setActiveId(id);
     scrollToId(id);
     window.history.replaceState(null, "", `#${id}`);
   };
 
-  const active = scrolled || open;
+  const hrefFor = (id: string) => `${homeBase}#${id}`;
+  const active = scrolled || open || !isHome;
 
   return (
     <header
@@ -72,8 +81,8 @@ export default function Navbar() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-12 lg:py-5">
         <motion.a
-          href="#inicio"
-          onClick={(e) => handleNav(e, "#inicio")}
+          href={isHome ? "#inicio" : "/"}
+          onClick={(e) => isHome && handleNav(e, "inicio")}
           whileHover={{ scale: 1.03 }}
           transition={{ duration: 0.2 }}
           className="flex origin-left flex-col text-xl font-black leading-[0.85] tracking-tight text-brand-text sm:text-2xl"
@@ -85,13 +94,13 @@ export default function Navbar() {
         {/* Links: solo desktop */}
         <ul className="hidden items-center gap-8 text-sm font-medium lg:flex xl:gap-10">
           {links.map((link) => {
-            const isActive = activeId === link.href.replace("#", "");
+            const isActive = isHome && activeId === link.id;
             return (
-              <li key={link.href}>
+              <li key={link.id}>
                 <a
-                  href={link.href}
+                  href={hrefFor(link.id)}
                   aria-current={isActive ? "true" : undefined}
-                  onClick={(e) => handleNav(e, link.href)}
+                  onClick={(e) => handleNav(e, link.id)}
                   className={`underline-hover block py-1 transition-colors duration-300 ${
                     isActive ? "text-brand-text" : "text-brand-text/70 hover:text-brand-text"
                   }`}
@@ -106,13 +115,18 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           {/* Botón del navbar: solo desktop */}
           <div className="hidden lg:block">
-            <MotionButton
-              target="contacto"
-              size="sm"
-              className="whitespace-nowrap"
-            >
-              Contacto
-            </MotionButton>
+            {isHome ? (
+              <MotionButton target="contacto" size="sm" className="whitespace-nowrap">
+                Contacto
+              </MotionButton>
+            ) : (
+              <a
+                href={`${homeBase || "/"}#contacto`}
+                className="inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-brand-lime px-4 text-xs font-extrabold uppercase tracking-wide text-brand-bg transition hover:brightness-110"
+              >
+                Contacto
+              </a>
+            )}
           </div>
 
           {/* Hamburguesa: todo lo que no es desktop */}
@@ -165,10 +179,10 @@ export default function Navbar() {
                 className="flex flex-col gap-4 py-4 text-base font-medium"
               >
                 {links.map((link) => {
-                  const isActive = activeId === link.href.replace("#", "");
+                  const isActive = isHome && activeId === link.id;
                   return (
                     <motion.li
-                      key={link.href}
+                      key={link.id}
                       variants={{
                         hidden: { opacity: 0, x: -16 },
                         show: {
@@ -179,9 +193,9 @@ export default function Navbar() {
                       }}
                     >
                       <a
-                        href={link.href}
+                        href={hrefFor(link.id)}
                         aria-current={isActive ? "true" : undefined}
-                        onClick={(e) => handleNav(e, link.href)}
+                        onClick={(e) => handleNav(e, link.id)}
                         className={`underline-hover block py-1 transition-colors duration-300 ${
                           isActive ? "text-brand-lime" : "text-brand-text"
                         }`}
@@ -193,14 +207,24 @@ export default function Navbar() {
                 })}
               </motion.ul>
 
-              <MotionButton
-                target="contacto"
-                size="sm"
-                className="w-full whitespace-nowrap"
-                onClick={() => setOpen(false)}
-              >
-                Contacto
-              </MotionButton>
+              {isHome ? (
+                <MotionButton
+                  target="contacto"
+                  size="sm"
+                  className="w-full whitespace-nowrap"
+                  onClick={() => setOpen(false)}
+                >
+                  Contacto
+                </MotionButton>
+              ) : (
+                <a
+                  href={`${homeBase || "/"}#contacto`}
+                  onClick={() => setOpen(false)}
+                  className="inline-flex h-10 w-full items-center justify-center rounded-md bg-brand-lime px-4 text-xs font-extrabold uppercase tracking-wide text-brand-bg"
+                >
+                  Contacto
+                </a>
+              )}
             </div>
           </motion.div>
         )}

@@ -1,0 +1,107 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+const updated = 'noviembre de 2026';
+
+
+---
+<Layout
+  pageTitle="Política de privacidad | One Warrior"
+  description="Cómo tratamos tus datos personales en el sitio de One Warrior."
+  homeBase="/"
+  path="/privacidad">
+  <main class="bg-brand-bg">
+    <article class="mx-auto max-w-3xl px-5 pb-20 pt-32 sm:px-8 sm:pt-40">
+      <p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand-lime sm:text-sm">Legal</p>
+      <h1 class="mt-4 text-3xl font-extrabold uppercase leading-tight tracking-tight sm:text-5xl">
+        Política de privacidad
+      </h1>
+      <p class="mt-4 text-sm text-brand-muted">Última actualización: {updated}</p>
+
+      <div class="mt-10 space-y-8 text-sm leading-relaxed text-brand-muted sm:text-base">
+        <section>
+          <h2 class="mb-3 text-lg font-bold uppercase text-brand-text">1. Responsable</h2>
+          <p>
+            {site.name}, con domicilio en {site.location.address}, {site.location.city}, es responsable del
+            tratamiento de los datos personales que se obtengan a través de este sitio.
+            Contacto: <a href={site.whatsappUrl} class="underline-hover text-brand-lime">{site.whatsappDisplay}</a>.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-lg font-bold uppercase text-brand-text">2. Datos que tratamos</h2>
+          <p>
+            Este sitio no tiene formularios ni cuentas de usuario, por lo que no solicita datos personales de forma directa.
+            Los únicos datos que se generan son los que el navegador comparte automáticamente (dirección IP, tipo de
+            navegador y páginas visitadas) y los que vos decidís enviarnos si nos escribís por WhatsApp o email.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-lg font-bold uppercase text-brand-text">3. Finalidad</h2>
+          <p>
+            Usamos esos datos para responder tus consultas, coordinar clases y mejorar el funcionamiento del sitio.
+            No los utilizamos para publicidad ni los vendemos a terceros.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-lg font-bold uppercase text-brand-text">4. Almacenamiento en el navegador</h2>
+          <p>
+            El sitio guarda en tu navegador, con <code class="text-brand-text">sessionStorage</code>, un dato técnico que
+            indica si ya se reprodujeron las animaciones de entrada. Se borra al cerrar la pestaña y no contiene información
+            personal. No usamos cookies de seguimiento.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-lg font-bold uppercase text-brand-text">5. Servicios de terceros</h2>
+          <p>
+            Para mostrar el mapa de ubicación usamos Google Maps, que puede recibir datos técnicos de tu visita según su
+            propia política de privacidad. Los enlaces a WhatsApp, Instagram y Facebook también dependen de esas plataformas.
+            Te recomendamos revisar sus políticas.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-lg font-bold uppercase text-brand-text">6. Cuidado de los datos</h2>
+          <p>
+            Aplicamos medidas técnicas razonables para proteger la información. El sitio no almacena datos de usuarios
+            en servidores propios y no realiza tratamientos automatizados de decisión.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-lg font-bold uppercase text-brand-text">7. Tus derechos</h2>
+          <p>
+            Como titular de los datos, podés solicitar información, acceso, rectificación o supresión de tus datos
+            personales escribiéndonos por WhatsApp. La Agencia de Acceso a la Información Pública, órgano de control de la
+            Ley 25.326, atiende consultas y reclamos sobre protección de datos.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-lg font-bold uppercase text-brand-text">8. Menores de edad</h2>
+          <p>
+            Si sos menor de 18 años, consultá con tu padre, madre o tutor antes de enviarnos cualquier dato personal
+            por WhatsApp o email.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-lg font-bold uppercase text-brand-text">9. Cambios en esta política</h2>
+          <p>
+            Podemos actualizar esta política. La versión vigente es la publicada en esta página, con la fecha de
+            última actualización.
+          </p>
+        </section>
+      </div>
+
+      <a href="/" class="underline-hover mt-14 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-brand-lime">
+        Volver al inicio
+      </a>
+    </article>
+  </main>
+  <Footer />
+</Layout>

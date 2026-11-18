@@ -1,17 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import '../styles/global.css';
-import Hero from '../components/HeroContent.tsx';
-import Entrenamiento from '../components/Training.tsx';
-import SobreMi from '../components/AboutMe.tsx';
-import FAQ from '../components/Faq.tsx';
+import HeroContent from '../components/HeroContent';
+import Entrenamiento from '../components/Training';
+import SobreMi from '../components/AboutMe';
+import FAQ from '../components/Faq';
 import Contacto from '../components/Contact';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout pageTitle="One Warriors" description="Bienvenido a One Warriors">
+<Layout
+  pageTitle="One Warrior | Entrenamiento personalizado"
+  description="Kickboxing, Muay Thai y musculación con clases personalizadas en Chascomús."
+  path="/"
+>
   <main>
-    <Hero client:load />
+    <HeroContent client:load />
     <Entrenamiento client:visible />
     <SobreMi client:visible />
     <FAQ client:visible />
@@ -19,4 +22,3 @@ import Footer from '../components/Footer.astro';
   </main>
   <Footer />
 </Layout>
-  

@@ -1,0 +1,102 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+
+const updated = 'noviembre de 2026';
+---
+
+<Layout
+  pageTitle="Términos y condiciones | One Warrior"
+  description="Términos y condiciones de uso del sitio de One Warrior."
+  homeBase="/"
+  path="/terminos">  
+  <main class="bg-brand-bg">
+    <article class="mx-auto max-w-3xl px-5 pb-20 pt-32 sm:px-8 sm:pt-40">
+      <p class="text-xs font-semibold uppercase tracking-[0.35em] text-brand-lime sm:text-sm">Legal</p>
+      <h1 class="mt-4 text-3xl font-extrabold uppercase leading-tight tracking-tight sm:text-5xl">
+        Términos y condiciones
+      </h1>
+      <p class="mt-4 text-sm text-brand-muted">Última actualización: {updated}</p>
+
+      <div class="mt-10 space-y-8 text-sm leading-relaxed text-brand-muted sm:text-base">
+        <section>
+          <h2 class="mb-3 text-lg font-bold uppercase text-brand-text">1. Identificación</h2>
+          <p>
+            Este sitio es operado por {site.name}, con domicilio en {site.location.address}, {site.location.city}.
+            Contacto: <a href={site.whatsappUrl} class="underline-hover text-brand-lime" target="_blank" rel="noopener noreferrer">{site.whatsappDisplay}</a>.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-lg font-bold uppercase text-brand-text">2. Uso del sitio</h2>
+          <p>
+            El sitio tiene carácter informativo. Podés navegarlo, ver nuestros entrenamientos, horarios y
+            preguntas frecuentes, y contactarnos por WhatsApp o email. No está permitido usarlo para fines
+            ilícitos, copiar contenido con fines comerciales sin autorización, ni intentar vulnerar su funcionamiento.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-lg font-bold uppercase text-brand-text">3. Propiedad intelectual</h2>
+          <p>
+            Los textos, imágenes, videos, logotipos y diseño del sitio son propiedad de {site.name} o de sus
+            autores, y están protegidos por la legislación vigente. Su uso sin autorización escrita está prohibido.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-lg font-bold uppercase text-brand-text">4. Servicios y clases</h2>
+          <p>
+            La información de horarios, planes y precios puede cambiar. Te recomendamos confirmarla por WhatsApp
+            antes de concurrir. Las condiciones de inscripción, pagos, cancelaciones y reservas se acuerdan
+            directamente con el gimnasio al momento de contratar el servicio.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-lg font-bold uppercase text-brand-text">5. Salud y actividad física</h2>
+          <p>
+            Antes de comenzar una actividad física, es recomendable consultar con un profesional de la salud si tenés
+            alguna condición médica que pueda verse afectada por el entrenamiento. Cada persona debe entrenar dentro
+            de sus posibilidades y respetar las indicaciones del equipo.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-lg font-bold uppercase text-brand-text">6. Enlaces externos</h2>
+          <p>
+            El sitio puede incluir enlaces a redes sociales u otros sitios externos. One Warrior no controla ni se hace
+            responsable del contenido, funcionamiento o políticas de esos servicios.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-lg font-bold uppercase text-brand-text">7. Privacidad</h2>
+          <p>
+            El tratamiento de los datos personales se rige por nuestra
+            <a href="/privacidad" class="underline-hover text-brand-lime">Política de privacidad</a>. Al utilizar el
+            sitio, aceptás las prácticas descritas en dicha política.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-lg font-bold uppercase text-brand-text">8. Modificaciones</h2>
+          <p>
+            Podemos actualizar estos términos en cualquier momento. La fecha indicada al inicio reflejará la última
+            actualización. El uso continuado del sitio después de una modificación implica su aceptación.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="mb-3 text-lg font-bold uppercase text-brand-text">9. Legislación aplicable</h2>
+          <p>
+            Estos términos se interpretarán conforme a la legislación vigente en la República Argentina. Ante cualquier
+            conflicto, las partes podrán acudir a los organismos competentes de jurisdicción correspondiente.
+          </p>
+        </section>
+      </div>
+    </article>
+  </main>
+  <Footer />
+</Layout>

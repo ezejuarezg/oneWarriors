@@ -1,46 +1,83 @@
 ---
 import "../styles/global.css";
-import Navbar from '../components/Navbar.tsx';
-import SmoothScroll from '../components/SmoothScroll.tsx';
+import Navbar from "../components/Navbar";
+import SmoothScroll from "../components/SmoothScroll";
+import { site } from "../data/site";
 
 interface Props {
-  pageTitle: string;  
+  pageTitle: string;
   description?: string;
-
+  /** Vacío en la página principal. En otras páginas, "/" */
+  homeBase?: string;
+  /** Ruta de la página, por ejemplo "/terminos" */
+  path?: string;
+  /** Imagen para compartir en redes (ruta dentro de public/) */
+  image?: string;
 }
 
-const { pageTitle, description = 'Entrenamiento personalizado para alcanzar tus objetivos.' } = Astro.props;
+const {
+  pageTitle,
+  description = "Entrenamiento personalizado para alcanzar tus objetivos.",
+  homeBase = "",
+  path = "/",
+  image = "/img/og-image.jpg",
+} = Astro.props;
+
+const canonical = new URL(path, site.url).href;
+const imageUrl = new URL(image, site.url).href;
 ---
 
 <!doctype html>
-<html lang="es_AR">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
+<html lang="es-AR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- SEO básico -->
+    <title>{pageTitle}</title>
     <meta name="description" content={description} />
-		<link rel="icon" href="./favicon/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/png" href="./favicon/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="./favicon/favicon.svg" />
-    <link rel="shortcut icon" href="./favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="OneWarrios" />
-    <link rel="manifest" href="./site.webmanifest" />
-    <!-- Se ejecuta antes de iniciar: decide si la intro se reproduce -->
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonical} />
+    <meta name="author" content={site.name} />
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:alt" content={`${site.name} - entrenamiento personalizado`} />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+
+    <!-- Iconos y manifest -->
+    <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content="One Warrior" />
+
+    <!-- Antes de pintar: decide si la intro se reproduce -->
     <script is:inline>
       try {
-        if (sessionStorage.getItem('ow-intro-played') !== '1') {
-          document.documentElement.classList.add('intro-pending');
+        if (sessionStorage.getItem("ow-intro-played") !== "1") {
+          document.documentElement.classList.add("intro-pending");
         }
-        sessionStorage.setItem('ow-intro-played', '1');
+        sessionStorage.setItem("ow-intro-played", "1");
       } catch (e) {}
     </script>
-		<title> {pageTitle} </title>
-	</head>
-	<body>
+  </head>
+  <body>
     <SmoothScroll client:load />
-    <Navbar client:load />
-		<slot />
-	</body>
+    <Navbar client:load homeBase={homeBase} />
+    <slot />
+  </body>
 </html>
-
