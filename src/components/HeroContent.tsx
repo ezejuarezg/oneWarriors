@@ -108,9 +108,9 @@ export default function HeroContent() {
           {/* Móvil: 1 columna apilada. Tablet: 2 columnas. Desktop: columna con ancho máximo */}
           <div className="mt-8 grid gap-3 sm:mt-10 sm:gap-4 lg:mt-12 lg:max-w-xl">
             <AccessCard
-              target="planes"
-              title="Planes"
-              text="Elegí el plan que mejor se adapte a vos."
+              target="entrenamiento"
+              title="Entrenamiento"
+              text="Kick Boxing, Muai Thai, Musculación, Rutinas y Preparación Física"
               delay={0.6}
               icon={
                 <svg
@@ -123,15 +123,13 @@ export default function HeroContent() {
                   strokeLinejoin="round"
                   aria-hidden="true"
                 >
-                  <rect x="3" y="4" width="18" height="18" rx="2" />
-                  <path d="M16 2v4M8 2v4M3 10h18" />
-                  <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01" />
+                  <path d="M6.5 6.5v11M17.5 6.5v11M3 9v6M21 9v6M6.5 12h11" />
                 </svg>
               }
             />
 
             <AccessCard
-              target="contacto"
+              target="ubicacion"
               title="Horarios y ubicación"
               text="Entrená en nuestro espacio o de forma online."
               delay={0.68}

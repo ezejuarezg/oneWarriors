@@ -1,0 +1,116 @@
+
+---
+import { site } from '../data/site';
+import FooterAccordion from '../components/FooterAccordion';
+
+const year = new Date().getFullYear();
+
+const nav = [
+  { label: 'Inicio', href: '#inicio' },
+  { label: 'Entrenamiento', href: '#entrenamiento' },
+  { label: 'Sobre mí', href: '#sobre-mi' },
+  { label: 'Preguntas frecuentes', href: '#faq' },
+  { label: 'Ubicación', href: '#ubicacion' },
+  { label: 'Contacto', href: '#contacto' },
+];
+
+const legal = [
+  { label: 'Términos y condiciones', href: '/terminos' },
+  { label: 'Política de privacidad', href: '/privacidad' },
+];
+---
+
+<footer class="relative overflow-hidden border-t border-white/10 bg-brand-surface/40">
+  <div class="mx-auto w-full px-5 pt-6 pb-1 sm:px-8 sm:pt-8  lg:px-20">
+
+    <div class="flex w-full flex-col items-start gap-8 md:flex-row md:justify-between md:gap-10 lg:gap-16">
+
+      {/* Marca */}
+      <div class="flex max-w-xs flex-col items-start">
+        <a
+          href="#inicio"
+          class="flex w-fit flex-col text-xl font-black leading-[0.85] tracking-tight text-brand-text sm:text-2xl"
+        >
+          <span>one</span>
+          <span>warrior</span>
+        </a>
+
+        <p class="mt-2 max-w-65 text-xs leading-relaxed text-brand-muted sm:mt-4 sm:text-sm">
+          Entrenamiento real, enfocado en vos. Kick Boxing, Musculación y Preparación Física con el profesor de Educación Fiscia Facundo Vargas
+        </p>
+      </div>
+
+      {/* Navegación */}
+      <FooterAccordion title="Navegación" client:load>
+        <ul class="grid grid-cols-2 gap-x-6 gap-y-2.5 text-xs text-brand-muted sm:gap-y-3 sm:text-sm md:grid-cols-2 md:gap-y-2">
+          {nav.map((n) => (
+            <li>
+              <a
+                href={n.href}
+                class="underline-hover inline-block py-0.5 transition-colors hover:text-brand-text"
+              >
+                {n.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </FooterAccordion>
+
+      {/* Contacto */}
+      <FooterAccordion title="Contacto" client:load>
+        <ul class="flex flex-col gap-2 text-xs leading-relaxed text-brand-muted sm:gap-2.5 sm:text-sm">
+          <li>{site.location.address}</li>
+          <li>{site.location.city}</li>
+
+          <li>
+            <a
+              href={site.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="underline-hover inline-block py-0.5 transition-colors hover:text-brand-text"
+            >
+              {site.whatsappDisplay}
+            </a>
+          </li>
+
+        </ul>
+      </FooterAccordion>
+
+    </div>
+
+    {/* Barra inferior */}
+    <div class="mt-6 flex flex-col items-start gap-3 border-t border-white/10 py-5 text-left text-[10px] text-brand-muted sm:mt-3 sm:gap-4 sm:py-5 sm:text-xs md:flex-row md:items-center md:justify-between">
+
+      <p>
+        © {year} One Warrior. Todos los derechos reservados.
+      </p>
+
+      <p>
+        Página creada por{' '}
+        <a
+          class="underline-hover transition-colors hover:text-brand-text"
+          href="https://ezequieljuarez.vercel.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          @ezejuarezg
+        </a>
+      </p>
+
+      <ul class="flex flex-wrap justify-start gap-x-5 gap-y-2 md:justify-end">
+        {legal.map((l) => (
+          <li>
+            <a
+              href={l.href}
+              class="underline-hover transition-colors hover:text-brand-text"
+            >
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+    </div>
+  </div>
+</footer>
+

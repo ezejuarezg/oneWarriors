@@ -7,7 +7,7 @@ const LOAD_MS = 600;
 const ARROW_MS = 500;
 const NAV_OFFSET = -80; // alto del navbar fijo
 
-function scrollToId(id: string) {
+export function scrollToId(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
 

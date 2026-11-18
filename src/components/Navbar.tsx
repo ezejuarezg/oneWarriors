@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import MotionButton from "./MotionButton";
+import { scrollToId } from "./useScrollAction";
 
 const links = [
   { label: "Entrenamiento", href: "#entrenamiento" },
-  { label: "Planes", href: "#planes" },
   { label: "Sobre Mí", href: "#sobre-mi" },
-  { label: "FAQ", href: "#faq" },
+  { label: "Preguntas Frecuentes", href: "#faq" },
 ];
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -22,6 +22,15 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Scroll suave con Lenis, cierre del menú móvil y hash actualizado
+  const handleNav = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setOpen(false);
+    const id = href.replace("#", "");
+    scrollToId(id);
+    window.history.replaceState(null, "", `#${id}`);
+  };
+
   const active = scrolled || open;
 
   return (
@@ -35,6 +44,7 @@ export default function Navbar() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-12 lg:py-5">
         <motion.a
           href="#inicio"
+          onClick={(e) => handleNav(e, "#inicio")}
           whileHover={{ scale: 1.03 }}
           transition={{ duration: 0.2 }}
           className="flex origin-left flex-col text-xl font-black leading-[0.85] tracking-tight text-brand-text sm:text-2xl"
@@ -49,10 +59,10 @@ export default function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="group relative block py-1 transition-colors hover:text-brand-text"
+                onClick={(e) => handleNav(e, link.href)}
+                className="underline-hover block py-1 transition-colors hover:text-brand-text"
               >
                 {link.label}
-                <span className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-brand-lime transition-transform duration-300 group-hover:scale-x-100" />
               </a>
             </li>
           ))}
@@ -76,7 +86,7 @@ export default function Navbar() {
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-label={open ? "Cerrar menú" : "Abrir menú"}
-            className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 lg:hidden"
+            className="flex h-10 w-10 cursor-pointer flex-col items-center justify-center gap-1.5 lg:hidden"
           >
             <motion.span
               animate={open ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
@@ -133,8 +143,8 @@ export default function Navbar() {
                   >
                     <a
                       href={link.href}
-                      onClick={() => setOpen(false)}
-                      className="block py-1"
+                      onClick={(e) => handleNav(e, link.href)}
+                      className="underline-hover block py-1"
                     >
                       {link.label}
                     </a>
@@ -143,11 +153,11 @@ export default function Navbar() {
               </motion.ul>
 
               <MotionButton
-                target="planes"
+                target="contacto"
                 size="sm"
-                className="whitespace-nowrap w-full"
+                className="w-full whitespace-nowrap"
+                onClick={() => setOpen(false)}
               >
-                {" "}
                 Contacto
               </MotionButton>
             </div>

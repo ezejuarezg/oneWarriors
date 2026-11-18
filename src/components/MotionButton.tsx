@@ -1,17 +1,16 @@
-import { motion, AnimatePresence } from 'motion/react';
-import type { MouseEvent, ReactNode } from 'react';
-import { useScrollAction } from './useScrollAction';
+import { motion, AnimatePresence } from "motion/react";
+import type { MouseEvent, ReactNode } from "react";
+import { useScrollAction } from "./useScrollAction";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
+/* Medidas fijas: el contenido cambia dentro de ellas, así el botón nunca se redimensiona */
 const sizes = {
   lg: {
-    button: 'min-w-[14rem] px-7 py-4 text-sm',
-    label: 'gap-3',
+    button: "min-w-[14rem] px-7 py-4 text-sm",
   },
   sm: {
-    button: 'px-5 py-3 text-xs',
-    label: 'gap-2',
+    button: "h-10 min-w-40 px-4 text-xs",
   },
 } as const;
 
@@ -24,24 +23,24 @@ type MotionButtonProps = {
   /** Estado de carga controlado desde el padre (ej: un envío de formulario) */
   loading?: boolean;
   onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
-  type?: 'button' | 'submit';
+  type?: "button" | "submit";
   className?: string;
 };
 
 export default function MotionButton({
   children,
   target,
-  size = 'lg',
+  size = "lg",
   loading = false,
   onClick,
-  type = 'button',
-  className = '',
+  type = "button",
+  className = "",
 }: MotionButtonProps) {
-  const { phase, trigger } = useScrollAction(target ?? '');
+  const { phase, trigger } = useScrollAction(target ?? "");
   const s = sizes[size];
 
-  const isLoading = loading || phase === 'loading';
-  const showArrow = phase === 'arrow' && !loading;
+  const isLoading = loading || phase === "loading";
+  const showArrow = phase === "arrow" && !loading;
   const busy = isLoading || showArrow;
 
   const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
@@ -57,7 +56,7 @@ export default function MotionButton({
       aria-busy={isLoading}
       whileHover={busy ? undefined : { scale: 1.03 }}
       whileTap={busy ? undefined : { scale: 0.97 }}
-      className={`relative inline-flex items-center justify-center overflow-hidden rounded-md bg-brand-lime font-extrabold uppercase tracking-wide text-brand-bg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-lime focus-visible:ring-offset-2 focus-visible:ring-offset-brand-bg disabled:cursor-wait ${s.button} ${className}`}
+      className={`relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-md bg-brand-lime font-extrabold uppercase tracking-wide text-brand-bg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-lime focus-visible:ring-offset-2 focus-visible:ring-offset-brand-bg disabled:cursor-wait ${s.button} ${className}`}
     >
       {/* Brillo mientras carga */}
       <AnimatePresence>
@@ -65,10 +64,10 @@ export default function MotionButton({
           <motion.span
             key="shimmer"
             aria-hidden="true"
-            initial={{ x: '-100%' }}
-            animate={{ x: '100%' }}
+            initial={{ x: "-100%" }}
+            animate={{ x: "100%" }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.1, repeat: Infinity, ease: 'linear' }}
+            transition={{ duration: 1.1, repeat: Infinity, ease: "linear" }}
             className="pointer-events-none absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent"
           />
         )}
@@ -85,7 +84,7 @@ export default function MotionButton({
             transition={{
               opacity: { duration: 0.2 },
               scale: { duration: 0.2 },
-              rotate: { duration: 0.8, repeat: Infinity, ease: 'linear' },
+              rotate: { duration: 0.8, repeat: Infinity, ease: "linear" },
             }}
             className="block h-5 w-5 rounded-full border-2 border-brand-bg/30 border-t-brand-bg"
           />
@@ -118,7 +117,9 @@ export default function MotionButton({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.25, ease }}
-            className={`inline-flex items-center ${s.label}`}
+            className={`underline-hover underline-dark inline-flex items-center ${
+              size === "sm" ? "gap-2" : "gap-3"
+            }`}
           >
             {children}
           </motion.span>

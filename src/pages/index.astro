@@ -2,12 +2,21 @@
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
 import Hero from '../components/HeroContent.tsx';
+import Entrenamiento from '../components/Training.tsx';
+import SobreMi from '../components/AboutMe.tsx';
+import FAQ from '../components/Faq.tsx';
+import Contacto from '../components/Contact';
+import Footer from '../components/Footer.astro';
 ---
 
 <Layout pageTitle="One Warriors" description="Bienvenido a One Warriors">
   <main>
     <Hero client:load />
-    <!-- Próximas secciones -->
+    <Entrenamiento client:visible />
+    <SobreMi client:visible />
+    <FAQ client:visible />
+    <Contacto client:visible />
   </main>
+  <Footer />
 </Layout>
   
