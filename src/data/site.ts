@@ -1,16 +1,14 @@
 export const site = {
   name: "One Warrior",
   location: {
-    lat: -35.5667,
-    lng: -58.0167,
-    address: "Av. San Martín 1234",
+    lat: -35.5735,
+    lng: -58.0155,
+    address: "Belgrano 612",
     city: "Chascomús, Buenos Aires",
   },
-  whatsappUrl: "https://wa.me/5492241000000",
-  whatsappDisplay: "+54 9 2241 00-0000",
-  email: "hola@onewarrior.com.ar",
-  instagramUrl: "https://instagram.com/onewarrior",
-  facebookUrl: "https://facebook.com/onewarrior",
+  whatsappUrl: "https://wa.me/5492241460542",
+  whatsappDisplay: "+54 9 2241 46-0542",
+  instagramUrl: "https://www.instagram.com/onewarrior.vargas/",
 };
 
 export const schedule = [

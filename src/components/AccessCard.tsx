@@ -12,37 +12,21 @@ type AccessCardProps = {
   delay?: number;
 };
 
-export default function AccessCard({
-  target,
-  title,
-  text,
-  icon,
-  delay = 0,
-}: AccessCardProps) {
+export default function AccessCard({ target, title, text, icon, delay = 0 }: AccessCardProps) {
   const { phase, trigger } = useScrollAction(target);
   const loading = phase === "loading";
   const active = phase !== "idle";
 
   return (
-    // Entrada con CSS: solo corre en la primera visita de la pestaña
     <div className="overflow-hidden">
-      <div
-        className="intro-mask"
-        style={{ "--d": `${delay}s` } as CSSProperties}
-      >
-        <motion.button
+      <div className="intro-mask" style={{ "--d": `${delay}s` } as CSSProperties}>
+        <button
           type="button"
           onClick={trigger}
           aria-busy={loading}
-          whileHover={active ? undefined : { scale: 1.01 }}
-          whileTap={active ? undefined : { scale: 0.99 }}
-          animate={{
-            borderColor: active
-              ? "rgba(155,227,28,0.5)"
-              : "rgba(255,255,255,0.1)",
-          }}
-          transition={{ duration: 0.3 }}
-          className="relative flex w-full touch-manipulation items-center gap-3 overflow-hidden rounded-xl border bg-brand-surface/80 p-4 text-left backdrop-blur-sm sm:gap-5 sm:p-5"
+          className={`group relative flex w-full cursor-pointer touch-manipulation items-center gap-3 overflow-hidden rounded-xl border bg-brand-surface/80 p-4 text-left backdrop-blur-sm transition-colors duration-300 sm:gap-5 sm:p-5 ${
+            active ? "border-brand-lime/40" : "border-white/10 hover:border-brand-lime/40"
+          }`}
         >
           {/* Brillo mientras carga */}
           <AnimatePresence>
@@ -53,37 +37,32 @@ export default function AccessCard({
                 initial={{ x: "-100%" }}
                 animate={{ x: "100%" }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 1.1, repeat: Infinity, ease: "linear" }}
+                transition={{ duration: 0.6, repeat: Infinity, ease: "linear" }}
                 className="pointer-events-none absolute inset-0 bg-linear-to-r from-transparent via-brand-lime/10 to-transparent"
               />
             )}
           </AnimatePresence>
 
           {/* Barra lima lateral */}
-          <motion.span
+          <span
             aria-hidden="true"
-            animate={{ scaleY: active ? 1 : 0.5 }}
-            transition={{ duration: 0.3, ease }}
-            className="absolute inset-y-0 left-0 w-1 origin-center bg-brand-lime"
+            className={`absolute inset-y-0 left-0 w-1 origin-center bg-brand-lime transition-transform duration-300 ${
+              active ? "scale-y-100" : "scale-y-50 group-hover:scale-y-100"
+            }`}
           />
 
           <span className="shrink-0 text-brand-lime">{icon}</span>
+
           <div className="flex-1">
-            <h2 className="text-base font-bold uppercase text-brand-text">
-              {title}
-            </h2>
-            <p className="text-xs text-brand-muted sm:text-sm">{text}</p>{" "}
+            <h2 className="text-sm font-bold uppercase text-brand-text sm:text-base">{title}</h2>
+            <p className="text-xs text-brand-muted sm:text-sm">{text}</p>
           </div>
 
           {/* Indicador: spinner, flecha hacia abajo o flecha a la derecha */}
-          <motion.span
-            animate={{
-              borderColor: active
-                ? "rgba(155,227,28,0.6)"
-                : "rgba(255,255,255,0.2)",
-            }}
-            transition={{ duration: 0.3 }}
-            className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border sm:h-10 sm:w-10"
+          <span
+            className={`relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 sm:h-10 sm:w-10 ${
+              active ? "border-brand-lime" : "border-white/20 group-hover:border-brand-lime"
+            }`}
           >
             <AnimatePresence mode="wait" initial={false}>
               {loading ? (
@@ -94,8 +73,8 @@ export default function AccessCard({
                   animate={{ opacity: 1, rotate: 360 }}
                   exit={{ opacity: 0 }}
                   transition={{
-                    opacity: { duration: 0.2 },
-                    rotate: { duration: 0.8, repeat: Infinity, ease: "linear" },
+                    opacity: { duration: 0.15 },
+                    rotate: { duration: 0.5, repeat: Infinity, ease: "linear" },
                   }}
                   className="block h-4 w-4 rounded-full border-2 border-white/20 border-t-brand-lime"
                 />
@@ -112,12 +91,12 @@ export default function AccessCard({
                   strokeLinejoin="round"
                   aria-hidden="true"
                   className="text-brand-lime"
-                  initial={{ opacity: 0, y: -10 }}
+                  initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: [0, 0, 3, 0] }}
-                  exit={{ opacity: 0, y: 10 }}
+                  exit={{ opacity: 0, y: 8 }}
                   transition={{
-                    opacity: { duration: 0.2 },
-                    y: { duration: 0.5, ease, times: [0, 0.3, 0.6, 1] },
+                    opacity: { duration: 0.15 },
+                    y: { duration: 0.3, ease, times: [0, 0.3, 0.6, 1] },
                   }}
                 >
                   <path d="M12 5v14M6 13l6 6 6-6" />
@@ -137,14 +116,15 @@ export default function AccessCard({
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.2 }}
+                  transition={{ duration: 0.15 }}
+                  className="text-brand-text transition-transform duration-300 group-hover:translate-x-1 group-hover:text-brand-lime"
                 >
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </motion.svg>
               )}
             </AnimatePresence>
-          </motion.span>
-        </motion.button>
+          </span>
+        </button>
       </div>
     </div>
   );

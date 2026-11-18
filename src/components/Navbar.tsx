@@ -9,17 +9,45 @@ const links = [
   { label: "Preguntas Frecuentes", href: "#faq" },
 ];
 
+// Ids de las secciones que el navbar vigila para marcar la activa
+const sectionIds = links.map((l) => l.href.replace("#", ""));
+
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+
+      // La sección activa es la que cruza la franja del 35% superior de la pantalla
+      const line = window.innerHeight * 0.35;
+      let current: string | null = null;
+
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= line && rect.bottom > line) {
+          current = id;
+          break;
+        }
+      }
+
+      setActiveId(current);
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   // Scroll suave con Lenis, cierre del menú móvil y hash actualizado
@@ -27,6 +55,7 @@ export default function Navbar() {
     e.preventDefault();
     setOpen(false);
     const id = href.replace("#", "");
+    setActiveId(id);
     scrollToId(id);
     window.history.replaceState(null, "", `#${id}`);
   };
@@ -54,18 +83,24 @@ export default function Navbar() {
         </motion.a>
 
         {/* Links: solo desktop */}
-        <ul className="hidden items-center gap-8 text-sm font-medium text-brand-text/80 lg:flex xl:gap-10">
-          {links.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                onClick={(e) => handleNav(e, link.href)}
-                className="underline-hover block py-1 transition-colors hover:text-brand-text"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
+        <ul className="hidden items-center gap-8 text-sm font-medium lg:flex xl:gap-10">
+          {links.map((link) => {
+            const isActive = activeId === link.href.replace("#", "");
+            return (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  aria-current={isActive ? "true" : undefined}
+                  onClick={(e) => handleNav(e, link.href)}
+                  className={`underline-hover block py-1 transition-colors duration-300 ${
+                    isActive ? "text-brand-text" : "text-brand-text/70 hover:text-brand-text"
+                  }`}
+                >
+                  {link.label}
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="flex items-center gap-4">
@@ -129,27 +164,33 @@ export default function Navbar() {
                 }}
                 className="flex flex-col gap-4 py-4 text-base font-medium"
               >
-                {links.map((link) => (
-                  <motion.li
-                    key={link.href}
-                    variants={{
-                      hidden: { opacity: 0, x: -16 },
-                      show: {
-                        opacity: 1,
-                        x: 0,
-                        transition: { duration: 0.4, ease },
-                      },
-                    }}
-                  >
-                    <a
-                      href={link.href}
-                      onClick={(e) => handleNav(e, link.href)}
-                      className="underline-hover block py-1"
+                {links.map((link) => {
+                  const isActive = activeId === link.href.replace("#", "");
+                  return (
+                    <motion.li
+                      key={link.href}
+                      variants={{
+                        hidden: { opacity: 0, x: -16 },
+                        show: {
+                          opacity: 1,
+                          x: 0,
+                          transition: { duration: 0.4, ease },
+                        },
+                      }}
                     >
-                      {link.label}
-                    </a>
-                  </motion.li>
-                ))}
+                      <a
+                        href={link.href}
+                        aria-current={isActive ? "true" : undefined}
+                        onClick={(e) => handleNav(e, link.href)}
+                        className={`underline-hover block py-1 transition-colors duration-300 ${
+                          isActive ? "text-brand-lime" : "text-brand-text"
+                        }`}
+                      >
+                        {link.label}
+                      </a>
+                    </motion.li>
+                  );
+                })}
               </motion.ul>
 
               <MotionButton

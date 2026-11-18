@@ -82,7 +82,7 @@ export default function HeroContent() {
             <div className="mt-6 overflow-hidden sm:mt-8 sm:inline-block">
               <div className="intro-mask" style={d(0.5)}>
                 <MotionButton
-                  target="planes"
+                  target="contacto"
                   size="lg"
                   className="w-full sm:w-auto"
                 >
@@ -129,9 +129,9 @@ export default function HeroContent() {
             />
 
             <AccessCard
-              target="ubicacion"
+              target="faq"
               title="Horarios y ubicación"
-              text="Entrená en nuestro espacio o de forma online."
+              text="Respuestas sobre nuestros horarios, dirección y atención."
               delay={0.68}
               icon={
                 <svg

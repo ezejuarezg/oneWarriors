@@ -3,8 +3,8 @@ import { getLenis } from '../lib/lenis';
 
 export type ActionPhase = 'idle' | 'loading' | 'arrow';
 
-const LOAD_MS = 600;
-const ARROW_MS = 500;
+const LOAD_MS = 350;
+const ARROW_MS = 300;
 const NAV_OFFSET = -80; // alto del navbar fijo
 
 export function scrollToId(id: string) {

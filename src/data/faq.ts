@@ -1,13 +1,17 @@
-export const faqs = [
+import { site } from "./site";
+
+export type Faq = {
+  question: string;
+  answer: string;
+  /** Muestra el mapa de Google Maps debajo de la respuesta */
+  showMap?: boolean;
+};
+
+export const faqs: Faq[] = [
   {
     question: "¿Qué tipos de entrenamiento ofrecen?",
     answer:
-      "Ofrecemos kickboxing y Muay Thai, musculación con clases personalizadas, y rutinas de preparación física adaptadas a cada persona.",
-  },
-  {
-    question: "¿Necesito experiencia previa?",
-    answer:
-      "No. Adaptamos cada entrenamiento a tu nivel, desde quien empieza hasta quien ya entrena hace tiempo.",
+      "Ofrecemos Kick Boxing y Muay Thai, Musculación con clases personalizadas, y rutinas de preparación física adaptadas a cada persona.",
   },
   {
     question: "¿Cuáles son los horarios?",
@@ -15,9 +19,9 @@ export const faqs = [
       "Los horarios varían según la clase. Escribinos por WhatsApp y te pasamos la grilla actualizada.",
   },
   {
-    question: "¿Donde queda ubicado el gimnasio?",
-    answer:
-      "Agregar mapa y ubicacion de google maps",
+    question: "¿Dónde queda ubicado el gimnasio?",
+    answer: `Estamos en ${site.location.address}, ${site.location.city}.`,
+    showMap: true,
   },
   {
     question: "¿Cómo puedo inscribirme?",

@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, MotionConfig } from "motion/react";
-import { faqs } from "../data/faq";
+import { faqs, type Faq } from "../data/faq";
+import { site } from "../data/site";
 
 const SEEN_KEY = "ow-faq-seen";
 const ease = [0.22, 1, 0.36, 1] as const;
 
-// Reemplazá por tu número real, con código de país y sin signos
-const WHATSAPP_URL = "https://wa.me/5492241000000";
+const MAP_EMBED = `https://www.google.com/maps?q=${site.location.lat},${site.location.lng}&z=16&output=embed`;
+const MAPS_LINK = `https://www.google.com/maps/search/?api=1&query=${site.location.lat},${site.location.lng}`;
 
 /* La entrada de la sección se reproduce solo la primera vez por sesión */
 function useSectionReveal<T extends HTMLElement>() {
@@ -43,13 +44,11 @@ function useSectionReveal<T extends HTMLElement>() {
 }
 
 function FAQItem({
-  question,
-  answer,
+  item,
   open,
   onToggle,
 }: {
-  question: string;
-  answer: string;
+  item: Faq;
   open: boolean;
   onToggle: () => void;
 }) {
@@ -66,7 +65,7 @@ function FAQItem({
         className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left sm:px-6 sm:py-5"
       >
         <span className="text-sm font-medium text-brand-text sm:text-base">
-          {question}
+          {item.question}
         </span>
 
         {/* Signo + que gira a × al abrir */}
@@ -92,9 +91,41 @@ function FAQItem({
             transition={{ duration: 0.35, ease }}
             className="overflow-hidden"
           >
-            <p className="px-5 pb-5 text-sm leading-relaxed text-brand-muted sm:px-6 sm:text-base">
-              {answer}
-            </p>
+            <div className="px-5 pb-5 sm:px-6">
+              <p className="text-sm leading-relaxed text-brand-muted sm:text-base">
+                {item.answer}
+              </p>
+
+              {item.showMap && (
+                <>
+                  {/* El iframe solo existe mientras la pregunta está abierta */}
+                  <div className="mt-4 overflow-hidden rounded-lg border border-white/10">
+                    <iframe
+                      src={MAP_EMBED}
+                      title="Ubicación del gimnasio en Google Maps"
+                      width="100%"
+                      height="240"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      className="block w-full border-0"
+                      style={{ filter: "invert(0.92) hue-rotate(180deg) saturate(0.6)" }}
+                    />
+                  </div>
+
+                  <a
+                    href={MAPS_LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline-hover mt-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-brand-lime"
+                  >
+                    Abrir en Google Maps
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M7 17L17 7M9 7h8v8" />
+                    </svg>
+                  </a>
+                </>
+              )}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -164,10 +195,10 @@ export default function FAQ() {
                 </p>
 
                 <a
-                  href={WHATSAPP_URL}
+                  href={site.whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="underline-hover group mt-10 inline-flex items-center gap-3 rounded-md border-2 border-brand-lime px-5 py-3.5 text-sm font-extrabold uppercase tracking-wide text-brand-lime transition-colors duration-300 hover:bg-brand-lime hover:text-brand-bg"
+                  className="group mt-10 inline-flex items-center gap-3 rounded-md border-2 border-brand-lime px-5 py-3.5 text-sm font-extrabold uppercase tracking-wide text-brand-lime transition-colors duration-300 hover:bg-brand-lime hover:text-brand-bg"
                 >
                   ¿No encontrás tu respuesta?
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -183,8 +214,7 @@ export default function FAQ() {
               {faqs.map((f, i) => (
                 <FAQItem
                   key={f.question}
-                  question={f.question}
-                  answer={f.answer}
+                  item={f}
                   open={openIndex === i}
                   onToggle={() => setOpenIndex(openIndex === i ? null : i)}
                 />
