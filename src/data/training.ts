@@ -24,11 +24,6 @@ export const categories: Category[] = [
         alt: "Entrenamiento de Kick Boxing y Muai Thai",
       },
       {
-        kind: "video",
-        src: "/img/entrenamiento/kickBoxing/fotoKick04.webp",
-        alt: "Entrenamiento de Kick Boxing y Muai Thai",
-      },
-      {
         kind: "photo",
         src: "/img/entrenamiento/kickBoxing/fotoKick01.webp",
         alt: "Entrenamiento de Kick Boxing y Muai Thai",
