@@ -43,7 +43,7 @@ export default function AccessCard({ target, title, text, icon, delay = 0 }: Acc
             )}
           </AnimatePresence>
 
-          {/* Barra lima lateral */}
+          {/* Barra lateral de acento */}
           <span
             aria-hidden="true"
             className={`absolute inset-y-0 left-0 w-1 origin-center bg-brand-lime transition-transform duration-300 ${

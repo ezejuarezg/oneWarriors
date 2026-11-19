@@ -54,18 +54,12 @@ export default function HeroContent() {
 
             <h1 className="mt-4 text-[2.5rem] font-black uppercase leading-[0.95] tracking-tight sm:mt-5 sm:text-6xl lg:text-7xl">
               <span className="block overflow-hidden">
-                <span
-                  className="intro-mask block text-brand-text"
-                  style={d(0.2)}
-                >
+                <span className="intro-mask block text-brand-text" style={d(0.2)}>
                   Convertite en un
                 </span>
               </span>
               <span className="block overflow-hidden">
-                <span
-                  className="intro-mask block italic text-brand-lime"
-                  style={d(0.28)}
-                >
+                <span className="intro-mask block italic text-brand-lime" style={d(0.28)}>
                   Warrior
                 </span>
               </span>
@@ -81,11 +75,7 @@ export default function HeroContent() {
             {/* Móvil: botón de ancho completo. Desktop: tamaño natural */}
             <div className="mt-6 overflow-hidden sm:mt-8 sm:inline-block">
               <div className="intro-mask" style={d(0.5)}>
-                <MotionButton
-                  target="contacto"
-                  size="lg"
-                  className="w-full sm:w-auto"
-                >
+                <MotionButton target="contacto" size="lg" className="w-full sm:w-auto">
                   Empezá ahora
                   <svg
                     width="18"
@@ -110,7 +100,7 @@ export default function HeroContent() {
             <AccessCard
               target="entrenamiento"
               title="Entrenamiento"
-              text="Kick Boxing, Muai Thai, Musculación, Rutinas y Preparación Física"
+              text="Kick Boxing, Muay Thai, Musculación, Rutinas y Preparación Física"
               delay={0.6}
               icon={
                 <svg

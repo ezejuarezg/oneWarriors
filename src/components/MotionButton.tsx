@@ -56,7 +56,7 @@ export default function MotionButton({
       aria-busy={isLoading}
       whileHover={busy ? undefined : { scale: 1.03 }}
       whileTap={busy ? undefined : { scale: 0.97 }}
-      className={`relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-md bg-brand-lime font-extrabold uppercase tracking-wide text-brand-bg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-lime focus-visible:ring-offset-2 focus-visible:ring-offset-brand-bg disabled:cursor-wait ${s.button} ${className}`}
+      className={`relative inline-flex shrink-0 items-center justify-center overflow-hidden rounded-md bg-brand-lime font-extrabold uppercase tracking-wide text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-lime focus-visible:ring-offset-2 focus-visible:ring-offset-brand-bg disabled:cursor-wait ${s.button} ${className}`}
     >
       {/* Brillo mientras carga */}
       <AnimatePresence>
@@ -86,7 +86,7 @@ export default function MotionButton({
               scale: { duration: 0.2 },
               rotate: { duration: 0.8, repeat: Infinity, ease: "linear" },
             }}
-            className="block h-5 w-5 rounded-full border-2 border-brand-bg/30 border-t-brand-bg"
+            className="block h-5 w-5 rounded-full border-2 border-white/30 border-t-white"
           />
         ) : showArrow ? (
           <motion.svg

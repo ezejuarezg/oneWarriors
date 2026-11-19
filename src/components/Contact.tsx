@@ -102,7 +102,7 @@ export default function Contacto() {
 
               <h2 className="mt-6 text-4xl font-extrabold uppercase leading-[0.95] tracking-tight sm:text-5xl lg:text-6xl">
                 Empezá ahora <br />
-                <span className="block italic text-brand-lime drop-shadow-[0_0_18px_rgba(155,227,28,0.45)]">
+                <span className="block italic text-brand-lime drop-shadow-[0_0_18px_rgba(36,86,255,0.45)]">
                   tu camino
                 </span>
               </h2>
@@ -111,7 +111,6 @@ export default function Contacto() {
                 Entrená en un espacio diseñado para que alcances tus objetivos.
                 ¡Escribinos y reservá tu lugar!
               </p>
-
             </div>
 
             {/* Canales de contacto */}
@@ -158,7 +157,6 @@ export default function Contacto() {
               ))}
             </ul>
           </div>
-          
         </div>
       </section>
     </MotionConfig>

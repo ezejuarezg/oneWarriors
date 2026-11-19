@@ -71,6 +71,9 @@ export default function Navbar({ homeBase = "" }: NavbarProps) {
   const hrefFor = (id: string) => `${homeBase}#${id}`;
   const active = scrolled || open || !isHome;
 
+  const contactLinkClass =
+    "inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-brand-lime px-4 text-xs font-extrabold uppercase tracking-wide text-white transition hover:brightness-110";
+
   return (
     <header
       className={`intro-down fixed inset-x-0 top-0 z-50 border-b backdrop-blur-md transition-colors duration-500 ${
@@ -79,16 +82,23 @@ export default function Navbar({ homeBase = "" }: NavbarProps) {
           : "border-transparent bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8 lg:px-12 lg:py-5">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-8 lg:px-12 lg:py-4">
+        {/* Logo */}
         <motion.a
           href={isHome ? "#inicio" : "/"}
           onClick={(e) => isHome && handleNav(e, "inicio")}
           whileHover={{ scale: 1.03 }}
           transition={{ duration: 0.2 }}
-          className="flex origin-left flex-col text-xl font-black leading-[0.85] tracking-tight text-brand-text sm:text-2xl"
+          aria-label="One Warrior, ir al inicio"
+          className="flex shrink-0 items-center"
         >
-          <span>one</span>
-          <span>warrior</span>
+          <img
+            src="/img/logo/logo.webp"
+            alt="One Warrior"
+            width={512}
+            height={512}
+            className="h-10 w-auto sm:h-12 lg:h-14"
+          />
         </motion.a>
 
         {/* Links: solo desktop */}
@@ -120,10 +130,7 @@ export default function Navbar({ homeBase = "" }: NavbarProps) {
                 Contacto
               </MotionButton>
             ) : (
-              <a
-                href={`${homeBase || "/"}#contacto`}
-                className="inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-brand-lime px-4 text-xs font-extrabold uppercase tracking-wide text-brand-bg transition hover:brightness-110"
-              >
+              <a href={`${homeBase || "/"}#contacto`} className={contactLinkClass}>
                 Contacto
               </a>
             )}
@@ -220,7 +227,7 @@ export default function Navbar({ homeBase = "" }: NavbarProps) {
                 <a
                   href={`${homeBase || "/"}#contacto`}
                   onClick={() => setOpen(false)}
-                  className="inline-flex h-10 w-full items-center justify-center rounded-md bg-brand-lime px-4 text-xs font-extrabold uppercase tracking-wide text-brand-bg"
+                  className={`${contactLinkClass} w-full`}
                 >
                   Contacto
                 </a>

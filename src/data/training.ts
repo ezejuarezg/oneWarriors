@@ -25,7 +25,7 @@ export const categories: Category[] = [
       },
       {
         kind: "video",
-        src: "/video/Video_kickBoxing/videoKick00.webm",
+        src: "/img/entrenamiento/kickBoxing/fotoKick04.webp",
         alt: "Entrenamiento de Kick Boxing y Muai Thai",
       },
       {
@@ -34,8 +34,8 @@ export const categories: Category[] = [
         alt: "Entrenamiento de Kick Boxing y Muai Thai",
       },
       {
-        kind: "video",
-        src: "/video/Video_kickBoxing/videoKick01.webm",
+        kind: "photo",
+        src: "/img/entrenamiento/kickBoxing/fotoKick03.webp",
         alt: "Entrenamiento de Kick Boxing y Muai Thai",
       },
       {
@@ -43,6 +43,11 @@ export const categories: Category[] = [
         src: "/img/entrenamiento/kickBoxing/fotoKick02.webp",
         alt: "Entrenamiento de Kick Boxing y Muai Thai",
       },
+      {
+        kind: "video",
+        src: "/video/Video_kickBoxing/videoKick01.webm",
+        alt: "Entrenamiento de Kick Boxing y Muai Thai",
+      }
     ],
   },
   {

@@ -1,15 +1,11 @@
-
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 
 interface FooterAccordionProps {
   title: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-export default function FooterAccordion({
-  title,
-  children,
-}: FooterAccordionProps) {
+export default function FooterAccordion({ title, children }: FooterAccordionProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -21,10 +17,10 @@ export default function FooterAccordion({
 
         <button
           type="button"
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setIsOpen((v) => !v)}
           aria-expanded={isOpen}
           aria-label={`${isOpen ? "Cerrar" : "Abrir"} ${title}`}
-          className="flex h-8 w-8 items-center justify-center text-brand-text transition-colors hover:text-brand-lime md:hidden"
+          className="flex h-8 w-8 cursor-pointer items-center justify-center text-brand-text transition-colors hover:text-brand-lime md:hidden"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -35,26 +31,22 @@ export default function FooterAccordion({
             stroke="currentColor"
             strokeWidth="1.7"
             strokeLinecap="round"
-            className={`transition-transform duration-300 ${
-              isOpen ? "rotate-45" : ""
-            }`}
+            aria-hidden="true"
+            className={`transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}
           >
             <path d="M12 5v14M5 12h14" />
           </svg>
         </button>
       </div>
 
+      {/* Móvil: se colapsa con la altura. Desktop: siempre visible */}
       <div
-        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out md:grid-rows-[1fr] md:opacity-100 ${
-          isOpen
-            ? "grid-rows-[1fr] opacity-100"
-            : "grid-rows-[0fr] opacity-0 md:opacity-100"
-        }`}
+        className={`grid transition-[grid-template-rows,opacity] duration-300 ease-in-out ${
+          isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+        } md:grid-rows-[1fr] md:opacity-100`}
       >
         <div className="overflow-hidden">
-          <div className="pt-3 sm:pt-4">
-            {children}
-          </div>
+          <div className="pt-3 sm:pt-4">{children}</div>
         </div>
       </div>
     </div>

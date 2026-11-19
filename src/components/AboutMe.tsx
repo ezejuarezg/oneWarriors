@@ -41,9 +41,7 @@ function useSectionReveal<T extends HTMLElement>() {
 const pillars = [
   {
     label: "Entrenamiento personalizado",
-    icon: (
-      <path d="M6.5 6.5v11M17.5 6.5v11M3 9v6M21 9v6M6.5 12h11" />
-    ),
+    icon: <path d="M6.5 6.5v11M17.5 6.5v11M3 9v6M21 9v6M6.5 12h11" />,
   },
   {
     label: "Compromiso y constancia",
@@ -88,8 +86,8 @@ export default function SobreMi() {
 
               <h2 className="mt-5 text-3xl font-extrabold uppercase leading-tight tracking-tight sm:text-5xl lg:text-6xl">
                 Mi pasión, <br />
-                tu
-                <span className="text-brand-lime drop-shadow-[0_0_18px_rgba(155,227,28,0.45)]">
+                tu{" "}
+                <span className="text-brand-lime drop-shadow-[0_0_18px_rgba(36,86,255,0.45)]">
                   entrenamiento
                 </span>
               </h2>
@@ -140,9 +138,9 @@ export default function SobreMi() {
               {/* CTA */}
               <a
                 rel="noopener noreferrer"
-                target="blank"
+                target="_blank"
                 href="https://www.instagram.com/ironarmourfit/"
-                className="group mt-10 inline-flex items-center gap-3 rounded-md border-2 border-brand-lime px-6 py-3.5 text-sm font-extrabold uppercase tracking-wide text-brand-lime transition-colors duration-300 hover:bg-brand-lime hover:text-brand-bg"
+                className="group mt-10 inline-flex items-center gap-3 rounded-md border-2 border-brand-lime px-6 py-3.5 text-sm font-extrabold uppercase tracking-wide text-brand-lime transition-colors duration-300 hover:bg-brand-lime hover:text-white"
               >
                 Conocé el gimnasio
                 <svg
@@ -164,27 +162,25 @@ export default function SobreMi() {
 
             {/* Collage de fotos */}
             <div
-              className={`relative mx-auto w-full max-w-md lg:max-w-s ${revealClass}`}
+              className={`relative mx-auto w-full max-w-md lg:max-w-none ${revealClass}`}
               style={revealStyle}
             >
-              {/* Marcos verdes decorativos */}
+              {/* Marco azul decorativo */}
               <span
                 className="pointer-events-none absolute -left-3 -top-4 h-[90%] w-[80%] -rotate-3 rounded-xl border border-brand-lime/70 sm:-left-6 sm:-top-6"
                 aria-hidden="true"
               />
-              
 
-              <div className="grid grid-cols grid-rows-2 gap-3 sm:gap-4">
+              <div className="grid grid-rows-2 gap-3 sm:gap-4">
                 {/* Foto principal */}
                 <div className="group relative col-span-3 row-span-2 aspect-3/4 -rotate-2 overflow-hidden rounded-xl border border-white/10 transition-transform duration-500 hover:rotate-0">
                   <img
                     src="/img/aboutme/coach.webp"
                     alt="Foto del coach Facundo Vargas posando en posición de combate"
                     loading="lazy"
-                    className="h-full w-full object-cover  transition duration-500 group-hover:scale-[1.02]"
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.02]"
                   />
                 </div>
-
               </div>
             </div>
           </div>
@@ -196,4 +192,3 @@ export default function SobreMi() {
     </MotionConfig>
   );
 }
-

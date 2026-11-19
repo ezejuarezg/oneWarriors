@@ -289,7 +289,7 @@ export default function Entrenamiento() {
 
               <h2 className="mt-0.5 text-3xl font-extrabold uppercase leading-tight tracking-tight sm:text-5xl lg:text-6xl">
                 Disciplina que <br /> te hace{" "}
-                <span className="text-brand-lime drop-shadow-[0_0_18px_rgba(155,227,28,0.45)]">
+                <span className="text-brand-lime drop-shadow-[0_0_18px_rgba(36,86,255,0.45)]">
                   más fuerte
                 </span>
               </h2>
@@ -417,9 +417,7 @@ export default function Entrenamiento() {
               </div>
             </div>
           </div>
-
         </div>
-        
       </section>
     </MotionConfig>
   );

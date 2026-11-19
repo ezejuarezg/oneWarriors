@@ -152,7 +152,7 @@ export default function FAQ() {
         {/* Foto de fondo, a la izquierda, con degradado hacia el fondo */}
         <div className="pointer-events-none absolute inset-y-0 left-0 w-full lg:w-1/2" aria-hidden="true">
           <img
-            src="/img/faq/faq.jpg"
+            src="/img/faq/faq.webp"
             alt=""
             loading="lazy"
             className="h-full w-full object-cover object-left opacity-40 grayscale lg:opacity-90"
@@ -184,7 +184,7 @@ export default function FAQ() {
 
                 <h2 className="mt-5 text-4xl font-extrabold uppercase leading-[0.95] tracking-tight sm:text-5xl lg:text-6xl">
                   Resolvé tus <br />
-                  <span className="text-brand-lime drop-shadow-[0_0_18px_rgba(155,227,28,0.45)]">
+                  <span className="text-brand-lime drop-shadow-[0_0_18px_rgba(36,86,255,0.45)]">
                     dudas
                   </span>
                 </h2>
@@ -198,7 +198,7 @@ export default function FAQ() {
                   href={site.whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group mt-10 inline-flex items-center gap-3 rounded-md border-2 border-brand-lime px-5 py-3.5 text-sm font-extrabold uppercase tracking-wide text-brand-lime transition-colors duration-300 hover:bg-brand-lime hover:text-brand-bg"
+                  className="group mt-10 inline-flex items-center gap-3 rounded-md border-2 border-brand-lime px-5 py-3.5 text-sm font-extrabold uppercase tracking-wide text-brand-lime transition-colors duration-300 hover:bg-brand-lime hover:text-white"
                 >
                   ¿No encontrás tu respuesta?
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
