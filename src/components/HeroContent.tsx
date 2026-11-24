@@ -32,7 +32,7 @@ export default function HeroContent() {
           <img
             src={heroImage}
             alt="Atleta entrenando con determinación"
-            className="intro-zoom h-full w-full object-cover object-[65%_top] sm:object-[60%_top] lg:object-right"
+            className="intro-zoom size-full object-cover object-[65%_top] sm:object-[60%_top] lg:object-left"
             loading="eager"
           />
         </motion.div>

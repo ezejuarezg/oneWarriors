@@ -80,9 +80,9 @@ export default function Contacto() {
             src="/img/contacto/beWarrior.webp"
             alt=""
             loading="lazy"
-            className="h-full w-full object-cover opacity-50 grayscale"
+            className="h-full w-full object-cover opacity-60 grayscale object-top-[70%] "
           />
-          <div className="absolute inset-0 bg-linear-to-r from-brand-bg via-brand-bg/85 to-brand-bg/60" />
+          <div className="absolute inset-0 bg-linear-to-r from-brand-bg via-brand-bg/15 to-brand-bg/60" />
           <div className="absolute inset-0 bg-linear-to-b from-brand-bg via-transparent to-brand-bg" />
         </div>
 

@@ -155,9 +155,9 @@ export default function FAQ() {
             src="/img/faq/faq.webp"
             alt=""
             loading="lazy"
-            className="h-full w-full object-cover object-left opacity-40 grayscale lg:opacity-90"
+            className="h-full w-full object-cover object-left opacity-95 grayscale lg:opacity-50"
           />
-          <div className="absolute inset-0 bg-linear-to-r from-brand-bg via-brand-bg/80 to-brand-bg" />
+          <div className="absolute inset-0 bg-linear-to-r from-brand-bg via-brand-bg/50 to-brand-bg" />
           <div className="absolute inset-0 bg-linear-to-b from-brand-bg via-transparent to-brand-bg" />
         </div>
 
